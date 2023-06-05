@@ -1,7 +1,5 @@
 const express = require("express");
 
-const authApiKey = require("./middlewares/auth_api_key")
-
 const app = express();
 const port = 3000;
 

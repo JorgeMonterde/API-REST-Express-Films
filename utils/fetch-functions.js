@@ -1,6 +1,6 @@
 require("dotenv").config();
-//http://localhost:3000/products?API_KEY="1234abcd"
 const correctAPIKey = process.env.API_KEY;
+//http://localhost:3000/products?API_KEY="1234abcd"
 
 async function getMovieFromAPI(title){
     //let titleQuery = title.split(""). ...Function to change title format

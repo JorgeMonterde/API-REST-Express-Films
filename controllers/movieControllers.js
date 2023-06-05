@@ -13,16 +13,26 @@ const createMovie = (req, res) => {
 // GETs:
 const getMovie = async (req, res) => {
     try{
-        let filmInfo = fetchFromAPI.getMovieFromAPI(req.params.title);
-        filmInfo.then(info => {
-            res.status(200).send(`<h1>${info.Title}</h1><h2>Directed by ${info.Director} in ${info.Year}</h2>
-            <p>Plot: ${info.Plot}</p>`);
-        }).catch(error => console.log(`Error: ${error}`));
+        let filmInfo = await fetchFromAPI.getMovieFromAPI(req.params.title);
+        res.status(200).json({
+            "title": filmInfo.Title, 
+            "Director": filmInfo.Director,
+            "Year": filmInfo.Year,
+            "plot": filmInfo.Plot
+        });
     } catch (error) {
         res.status(404).json({message: `Route ${req.url} Not found.`});
     }
 }
 const searchMovie = async (req, res) => {
+    try{
+        let filmInfo = await fetchFromAPI.searchMovieFromAPI(req.params.title);
+        res.status(200).json(filmInfo);
+    } catch (error) {
+        res.status(404).json({message: `Route ${req.url} Not found.`});
+    }
+}
+/* const searchMovie = async (req, res) => {
     try{
         let filmInfo = fetchFromAPI.searchMovieFromAPI(req.params.title);
         filmInfo.then(info => {
@@ -39,7 +49,7 @@ const searchMovie = async (req, res) => {
     } catch (error) {
         res.status(404).json({message: `Route ${req.url} Not found.`});
     }
-}
+} */
 
 
 const editMovie = (req, res) => {
